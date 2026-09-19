@@ -41,6 +41,15 @@
 			);
 			target = 160AC4C82E316282003D13A2 /* Brasileirao */;
 		};
+		16DA5A1C305F249700CB5576 /* Exceptions for "Brasileirao" folder in "BrasileiraoTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Screens/FanRegistration/FanRegistrationView.swift,
+				Screens/FanRegistration/FanRegistrationViewModel.swift,
+				Service/Network/NetworkServiceProtocol.swift,
+			);
+			target = 160AC4D72E316284003D13A2 /* BrasileiraoTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -48,6 +57,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				160AC5492E317DB9003D13A2 /* Exceptions for "Brasileirao" folder in "Brasileirao" target */,
+				16DA5A1C305F249700CB5576 /* Exceptions for "Brasileirao" folder in "BrasileiraoTests" target */,
 			);
 			path = Brasileirao;
 			sourceTree = "<group>";

@@ -1,9 +1,7 @@
 import SwiftUI
-import SwiftData
 
 struct GameListView: View {
     
-    @Environment(\.modelContext) var modelContext
     @StateObject private var viewModel: GameListViewModel
     
     init() {
@@ -22,11 +20,6 @@ struct GameListView: View {
                 .background(Color(.systemGroupedBackground))
 
                 ZStack {
-                    FilteredGamesList(filterStatus: viewModel.selectedStatus)
-                        .refreshable {
-                            await syncData()
-                        }
-                    
                     if viewModel.isLoading {
                         ProgressView("Buscando jogos...")
                             .padding()
@@ -60,10 +53,6 @@ struct GameListView: View {
             }, message: {
                 Text(viewModel.errorMessage ?? "Ocorreu um erro desconhecido.")
             })
-
-            .onAppear {
-                viewModel.modelContext = modelContext
-            }
         }
     }
     
@@ -93,17 +82,5 @@ struct FilterHeaderView: View {
         .foregroundColor(.primary)
         .padding(.vertical, 8)
         .listRowInsets(EdgeInsets())
-    }
-}
-
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Game.self, configurations: config)
-        
-        return GameListView()
-            .modelContainer(container)
-    } catch {
-        return Text("Falha ao criar o container do preview: \(error.localizedDescription)")
     }
 }
