@@ -57,7 +57,7 @@ struct FanRegistrationView: View {
                             try await viewModel.save()
                             dismiss()
                         } catch {
-                            viewModel.errorMessage = "Não foi possível salvar. Verifique os dados e tente novamente."
+                            viewModel.errorMessage = error.localizedDescription
                         }
                     }
                 } label: {

@@ -40,6 +40,10 @@ final class FanRegistrationViewModel: ObservableObject {
     func loadTeams() async {
         do {
             teams = try await networkService.fetchTeams()
+            guard !teams.isEmpty else {
+                errorMessage = "Não há times disponíveis para seleção."
+                return
+            }
             if favoriteTeamId.isEmpty, let first = teams.first {
                 favoriteTeamId = first.id
             }
@@ -62,11 +66,26 @@ final class FanRegistrationViewModel: ObservableObject {
         isLoading = true
         defer { isLoading = false }
 
+        let requiredValues = [name, email, birthDate, gender, favoriteTeamId, city, state, country]
+        guard requiredValues.allSatisfy({ !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }) else {
+            throw FanFormError.missingRequiredFields
+        }
+        guard !teams.isEmpty else { throw FanFormError.teamsUnavailable }
+        guard teams.contains(where: { $0.id == favoriteTeamId }) else { throw FanFormError.invalidFavoriteTeam }
+        let normalizedGender = gender.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard Self.genderOptions.contains(normalizedGender) else { throw FanFormError.invalidGender }
+
+        let displayedBirthDate = birthDate.trimmingCharacters(in: .whitespacesAndNewlines)
+        let storedBirthDate = FanBirthDateFormatter.storage(displayedBirthDate)
+        guard displayedBirthDate.count == 10, storedBirthDate != displayedBirthDate else {
+            throw FanFormError.invalidBirthDate
+        }
+
         let payload = FanPayload(
             name: name.trimmingCharacters(in: .whitespacesAndNewlines),
             email: email.trimmingCharacters(in: .whitespacesAndNewlines),
-            birthDate: FanBirthDateFormatter.storage(birthDate.trimmingCharacters(in: .whitespacesAndNewlines)),
-            gender: gender.trimmingCharacters(in: .whitespacesAndNewlines),
+            birthDate: storedBirthDate,
+            gender: normalizedGender,
             favoriteTeamId: favoriteTeamId,
             city: city.trimmingCharacters(in: .whitespacesAndNewlines),
             state: state.trimmingCharacters(in: .whitespacesAndNewlines),
@@ -81,4 +100,23 @@ final class FanRegistrationViewModel: ObservableObject {
         }
     }
 
+}
+
+
+enum FanFormError: LocalizedError {
+    case missingRequiredFields
+    case invalidBirthDate
+    case teamsUnavailable
+    case invalidFavoriteTeam
+    case invalidGender
+
+    var errorDescription: String? {
+        switch self {
+        case .missingRequiredFields: "Preencha todos os campos obrigatórios."
+        case .invalidBirthDate: "Informe uma data válida no formato DD/MM/AAAA."
+        case .teamsUnavailable: "Não foi possível carregar os times. Tente novamente."
+        case .invalidFavoriteTeam: "Selecione um time disponível."
+        case .invalidGender: "Selecione uma opção de gênero válida."
+        }
+    }
 }

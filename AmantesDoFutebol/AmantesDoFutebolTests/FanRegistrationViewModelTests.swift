@@ -77,7 +77,9 @@ final class FanRegistrationViewModelTests: XCTestCase {
 
     func testCreateTrimsFieldsAndSubmitsPayload() async throws {
         let service = MockNetworkService()
+        service.teams = [TeamDTO(id: "FLA", name: "Flamengo")]
         let viewModel = FanRegistrationViewModel(networkService: service)
+        await viewModel.loadTeams()
         fillForm(viewModel)
 
         try await viewModel.save()
@@ -97,7 +99,9 @@ final class FanRegistrationViewModelTests: XCTestCase {
 
     func testUpdateUsesFanID() async throws {
         let service = MockNetworkService()
+        service.teams = [TeamDTO(id: "FLA", name: "Flamengo")]
         let viewModel = FanRegistrationViewModel(fan: FanFixtures.make(id: 17), networkService: service)
+        await viewModel.loadTeams()
 
         try await viewModel.save()
 
@@ -107,8 +111,11 @@ final class FanRegistrationViewModelTests: XCTestCase {
 
     func testSaveFailureResetsLoadingAndPropagatesError() async {
         let service = MockNetworkService()
+        service.teams = [TeamDTO(id: "FLA", name: "Flamengo")]
         service.shouldFailSave = true
         let viewModel = FanRegistrationViewModel(networkService: service)
+        await viewModel.loadTeams()
+        fillForm(viewModel)
 
         do {
             try await viewModel.save()

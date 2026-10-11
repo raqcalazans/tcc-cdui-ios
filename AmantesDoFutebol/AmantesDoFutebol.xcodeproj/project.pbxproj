@@ -428,7 +428,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.selecaoglobocom.AmantesDoFutebol;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amantesdofutebol.AmantesDoFutebol;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -463,7 +463,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.selecaoglobocom.AmantesDoFutebol;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amantesdofutebol.AmantesDoFutebol;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -485,7 +485,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.selecaoglobocom.AmantesDoFutebolTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amantesdofutebol.AmantesDoFutebolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -504,7 +504,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.selecaoglobocom.AmantesDoFutebolTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amantesdofutebol.AmantesDoFutebolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -521,7 +521,7 @@
 				DEVELOPMENT_TEAM = KRD8562RRJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.selecaoglobocom.AmantesDoFutebolUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amantesdofutebol.AmantesDoFutebolUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -538,7 +538,7 @@
 				DEVELOPMENT_TEAM = KRD8562RRJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.selecaoglobocom.AmantesDoFutebolUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amantesdofutebol.AmantesDoFutebolUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
