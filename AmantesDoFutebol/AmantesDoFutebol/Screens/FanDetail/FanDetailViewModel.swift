@@ -7,9 +7,9 @@ final class FanDetailViewModel: ObservableObject {
     @Published private(set) var favoriteTeamName: String
     @Published var errorMessage: String?
 
-    var formattedBirthDate: String { FanBirthDateFormatter.display(fan.birthDate) }
+    var formattedBirthDate: String { FanDateFormatter.display(fan.birthDate) }
     var ageDescription: String {
-        guard let age = FanBirthDateFormatter.age(from: fan.birthDate) else { return "—" }
+        guard let age = FanDateFormatter.age(from: fan.birthDate) else { return "—" }
         return age == 1 ? "1 ano" : "\(age) anos"
     }
 

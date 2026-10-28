@@ -28,7 +28,7 @@ final class FanRegistrationViewModel: ObservableObject {
         self.networkService = networkService
         name = fan?.name ?? ""
         email = fan?.email ?? ""
-        birthDate = FanBirthDateFormatter.display(fan?.birthDate ?? "")
+        birthDate = FanDateFormatter.display(fan?.birthDate ?? "")
         gender = fan?.gender ?? ""
         favoriteTeamId = fan?.favoriteTeamId ?? ""
         city = fan?.city ?? ""
@@ -53,13 +53,7 @@ final class FanRegistrationViewModel: ObservableObject {
     }
 
     func updateBirthDateInput(_ input: String) {
-        let digits = String(input.filter(\.isNumber).prefix(8))
-        var formatted = ""
-        for (index, digit) in digits.enumerated() {
-            if index == 2 || index == 4 { formatted.append("/") }
-            formatted.append(digit)
-        }
-        birthDate = formatted
+        birthDate = FanDateFormatter.mask(input)
     }
 
     func save() async throws {
@@ -76,7 +70,7 @@ final class FanRegistrationViewModel: ObservableObject {
         guard Self.genderOptions.contains(normalizedGender) else { throw FanFormError.invalidGender }
 
         let displayedBirthDate = birthDate.trimmingCharacters(in: .whitespacesAndNewlines)
-        let storedBirthDate = FanBirthDateFormatter.storage(displayedBirthDate)
+        let storedBirthDate = FanDateFormatter.storage(displayedBirthDate)
         guard displayedBirthDate.count == 10, storedBirthDate != displayedBirthDate else {
             throw FanFormError.invalidBirthDate
         }
